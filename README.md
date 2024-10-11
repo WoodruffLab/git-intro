@@ -1,5 +1,6 @@
-# Hutlab `git` presentation
+# Intro to `git` for scientists
 
-Prepared for "Bonus" lab meeting, 2023-11-17
+Prepared for the Woodruff Lab, 2024-10-11
 
-See rendered slides here: https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html
+See rendered slides here: https://woodrufflab.gitlab.io/git-intro
+

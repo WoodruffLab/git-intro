@@ -1,8 +1,8 @@
 ---
 title: "Intro to git for scientists"
-subtitle: HutLab bonus lab meeting
+subtitle: Woodruff Lab
 author: Kevin Bonham, PhD
-date: 2023-11-17
+date: 2024-10-11
 format: 
     revealjs:
         toc: true
@@ -53,7 +53,7 @@ manuscript_curtis_edits.docx
 $ ls
 ```
 ```txt
-manuscript.tex
+manuscript.typ
 ```
 
 ```sh
