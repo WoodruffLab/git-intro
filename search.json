@@ -11,7 +11,7 @@
     "href": "tutorial-slides.html#versions-are-metadata-on-files",
     "title": "Intro to git for scientists",
     "section": "Versions are metadata on files",
-    "text": "Versions are metadata on files\n\n\n$ ls\nmanuscript.docx\nmanuscript_v2.docx\nmanuscript_v2_KSB_edits.docx\nmanuscript_curtis_edits.docx\n\n\nvs\n\n\n\n$ ls\nmanuscript.tex\n$ git log --oneline\n8266b5f (HEAD -&gt; more-revisions, origin/more-revisions) update curtis refs\na7500fe more more more\n5189e38 (tag: v0.6.1, origin/main, origin/HEAD, main) Merge pull request #203 from Klepac-Ceraj-Lab/editorial\n5b82aae last ? tweaks\nf730420 rebuild diff\ncb36033 short title and rearrange post-text\na8dfdf9 Guilherme comments\n0c9df09 remove abreviation in abstract\n75dd314 hack up abstract\n7a1546b change Figure-&gt; fig."
+    "text": "Versions are metadata on files\n\n\n$ ls\nmanuscript.docx\nmanuscript_v2.docx\nmanuscript_v2_KSB_edits.docx\nmanuscript_curtis_edits.docx\n\n\nvs\n\n\n\n$ ls\nmanuscript.typ\n$ git log --oneline\n8266b5f (HEAD -&gt; more-revisions, origin/more-revisions) update curtis refs\na7500fe more more more\n5189e38 (tag: v0.6.1, origin/main, origin/HEAD, main) Merge pull request #203 from Klepac-Ceraj-Lab/editorial\n5b82aae last ? tweaks\nf730420 rebuild diff\ncb36033 short title and rearrange post-text\na8dfdf9 Guilherme comments\n0c9df09 remove abreviation in abstract\n75dd314 hack up abstract\n7a1546b change Figure-&gt; fig."
   },
   {
     "objectID": "tutorial-slides.html#code-in-particular-needs-git",
