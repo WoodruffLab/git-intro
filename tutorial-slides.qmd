@@ -1,0 +1,530 @@
+---
+title: "Intro to git for scientists"
+subtitle: HutLab bonus lab meeting
+author: Kevin Bonham, PhD
+date: 2023-11-17
+format: 
+    revealjs:
+        toc: true
+        toc-depth: 1
+        code-line-numbers: false
+        navigation-mode: vertical
+        controls-layout: edges
+        controls-tutorial: true
+        slide-number: h.v
+incremental: true   
+---
+
+# Why `git`?
+
+## Version control
+
+![](https://swcarpentry.github.io/git-novice/fig/phd101212s.png){fig-align="center" width=350}
+
+## Versions are metadata on files
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+```sh
+$ ls
+```
+```txt
+manuscript.docx
+manuscript_v2.docx
+manuscript_v2_KSB_edits.docx
+manuscript_curtis_edits.docx
+```
+:::
+
+::: {.column width="5%"}
+::: {.fragment}
+**vs**
+:::
+::: 
+
+ 
+::: {.column width="55%"}
+
+::: {.fragment}
+
+```sh
+$ ls
+```
+```txt
+manuscript.tex
+```
+
+```sh
+$ git log --oneline
+```
+```txt
+8266b5f (HEAD -> more-revisions, origin/more-revisions) update curtis refs
+a7500fe more more more
+5189e38 (tag: v0.6.1, origin/main, origin/HEAD, main) Merge pull request #203 from Klepac-Ceraj-Lab/editorial
+5b82aae last ? tweaks
+f730420 rebuild diff
+cb36033 short title and rearrange post-text
+a8dfdf9 Guilherme comments
+0c9df09 remove abreviation in abstract
+75dd314 hack up abstract
+7a1546b change Figure-> fig.
+```
+
+:::
+::: 
+:::
+
+
+## Code in particular needs `git`
+
+- Code function often relies on the state of multiple files simultaneously
+- Adding or revising code can cause other code to go from a working state to a broken state
+- Because of 👆, collaboration on code can be tricky
+
+ 
+## The `git` model
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](https://imgs.xkcd.com/comics/git.png)
+
+:::
+
+::: {.column width="60%"}
+
+::: {.fragment}
+
+::: {.callout-warning}
+Seeing the value of `git` often requires using it "well",
+but using it well requires practice.
+Being motivated to practice is hard without seeing the value!
+:::
+
+:::
+
+:::
+
+::::
+
+## The `git` model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](assets/git_model.png)
+
+:::
+
+::: {.column width="50%"}
+
+- Code versions are built on "diffs";
+  only changes from previous version are "saved".
+- Each diff is line-based;
+  changing one character is recorded as deleting the line and inserting a new one
+- Versions ("commits") are always explicit
+
+:::
+
+::::
+
+## What is `git` good for?
+
+- plain text files
+- files that are undergoing incremental (and line-based) change
+- files whose state is changing frequently in small chunks
+- files whose content depends on other files in the same directory
+
+## What is `git` **_NOT_** good for?
+
+- files where the entire file is changing frequently (eg model outputs)
+- very large files (eg `.fastq`)
+- binary files (eg `.pdf`)
+- files where changes aren't line-based (eg many-column `.csv`)
+
+# Getting started
+
+## Basic vocabulary {.smaller}
+
+::: {.nonincremental}
+- **git**: the software to manage version control
+- **repository** (repo): a directory with superpowers
+- **remote**: another place where your git repo lives (often github / gitlab, but it's still just a directory)
+- **commit** (noun form): a snapshot of the state of all of your files at a given time - note: each commit only stores a diff from the previous state
+- **diff**: summary of line-by-line changes from one state to the next
+- **tracking**: files that have a state recorded by git (eg they have been committed)
+- **stage**: file(s) that have a change that should be registered in the next commit.
+- **branch**: a series of commits. The default is usually called `master` or `main`
+:::
+
+## Basic actions {.smaller .scrollable}
+
+::: {.nonincremental}
+- `git init`: give your directory `git` superpowers (usually just done once on a brand new project)
+	- This automatically sets up a default branch `main` or `master`
+- `git clone $URL`: make a local copy of some remote repo
+		- this automatically sets up `$URL` as a remote called `origin`
+- `git add $FILE`: stage a file to be committed
+- `git commit -m 'Some commit message'`: commit staged files
+	- more commonly, use `git commit -am 'Some commit message'`, which stages AND commits any files that had previously been tracked.
+- `git push`: sync commits from local to remote (only for current branch)
+- `git pull`: sync commits from remote to local (only for current branch)
+- `git branch $NAME`: create a new branch with name `$NAME`
+- `git checkout $NAME`: set working state to branch `$NAME`
+  - you can create and checkout a branch at the same time with `git checkout -b $NAME`
+:::
+
+# Demo
+
+## {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="1-2"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial1.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+## {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="3"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial5.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+## {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="4-5"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial2.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+
+## {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="6-10"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial3.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+## {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="11-12"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial4.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+## "Fast-foward" merge {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="6-10"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial6.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+## "Fast-foward" merge {.smaller auto-animate=true}
+
+```{.sh code-line-numbers="11-12"}
+$ git checkout main
+$ git reset --hard
+$ git checkout -b revisions # create a new branch, and check it out
+# make some edits to files
+$ git commit -am 'made changes'
+# make some edits to file1.txt and file2.txt
+$ git add file1.txt
+$ git commit -m 'Change file1'
+$ git add file2.txt
+$ git commit -m 'Change file2'
+$ git checkout main
+$ git merge revisions
+```
+
+![](assets/git_tutorial7.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52](https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52)
+
+##
+
+![](assets/complicated.png){fig-align="center"}
+
+see it in a terminal: [https://asciinema.org/a/5msKW2uk49gIf7UBmAuezihqY](https://asciinema.org/a/5msKW2uk49gIf7UBmAuezihqY)
+
+# Best practices and anti-patterns
+
+## Best practices with `git` {.smaller}
+
+- use `git status` frequently
+  - using a terminal prompt helper (eg [starship](https://starship.rs))
+    provides visual status information
+- commit early, commit often
+- use informative commit messages
+  - pretend (ha!) that your future self won't remember what you were doing
+- review your `git log --oneline --graph` (I set this to `gl`)
+- use branches even when you're working on your own. 
+  - merge branches to `main` when there is a complete "product"
+    (eg a figure, model, cleaned dataset)
+  - especially at first, use `--no-ff` to visualize branches
+    (you can set this as the default with `git config --global merge.ff false`)
+
+## {.smaller}
+
+::: {.callout-warning}
+## Very large commits
+This often hapens when you forget about `git` for a while,
+then think "oh crap, I should be committing this!",
+then do
+
+```bash
+$ git add .
+$ git commit -m 'lots of stuff'
+```
+
+**The problem**: diffs for very large commits aren't helpful,
+and any attempt to merge accross branches will almost certainly
+lead to messy conflicts.
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+## The Solution: Commit more frequently
+You should commit approximately every time you feel like you should save the file,
+at least in the beginning.
+
+When you inevitably forget anyway,
+try to commit one file at a
+time, and use `git diff` to see what has changed
+so that you can have an informative commit message.
+If you have a lot of different changes in one file,
+use `git add --patch $FILE` do just stage
+portions of the changes.
+:::
+:::
+
+## {.smaller}
+
+::: {.callout-warning}
+## Merge conflict paralysis
+Especially if you're working on your own,
+on one branch at a time, you can go a long time without
+encountering merge conflicts.
+Then, when one inevitably arises,
+you have no idea what do do.
+
+**The problem**: using `git pull` or `git merge`
+in a way that generates a a merge conflict
+puts your code in an un-runnable state,
+and blocks the ability to continue working.
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+## The Solution: Don't panic! (42)
+`git` is *made* for merge conflicts.
+You can almost always recover.
+
+1. Use `git merge --abort`. This should undo the `pull` or `merge` that you attempted.
+2. Double check that you're doing what you expected. Use `git status` and `git log`.
+3. If you *are* doing the right thing and there are conflicts,
+   checkout a new branch, and attempt the merge there,
+   so that if you screw it up, you can recover easily.
+4. Use a GUI to help (eg VS code, gitkraken)
+:::
+:::
+
+## {.smaller}
+
+::: {.callout-warning}
+## Oops! I committed something I shouldn't have
+Committing very large files
+or files that contain private information (eg identifiable data, security keys)
+can often happen by mistake, espcially if you use `git add .` (don't do that!).
+
+**The problem**: Even if you later do `git rm $FILE`,
+the addition and removal of those files are still in your history!
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+## The Solution: pay attention to what you commit
+You can use a `.gitignore` file to avoid accidentially committing eg `.csv` or `.pdf` files.
+If there's one of those files you actually *do* want to track, you can always do `git add --force $FILE`.
+You can have per-repo, per-directory, or even global `.gitignore` files!
+
+If you **do** commit something sensitive,
+follow [these steps](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
+to erase it.
+Note that this will change **every commit** downstream of adding the file
+(and if you later try to merge branches in other places, they may still have the data).
+:::
+:::
+
+## {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.callout-warning}
+## Abandoning git
+![](https://imgs.xkcd.com/comics/git.png){fig-align="center"}
+:::
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+::: {.callout-tip}
+## The Solution: use git!
+
+It's worth it!
+:::
+:::
+:::
+:::
+
+# `git` social networks (eg GitHub)
+
+## github (and gitlab and gitea etc) are social layers on top of git
+
+- Repos on github are still just directories with super powers
+- "Pull Requests" ("merge requests" on gitlab)
+  can be a useful way to keep track of your branches
+- "Issues" are useful for keeping track of things you want to do
+  or known problems
+- On github, you can link to highlights of [individual lines of code](https://github.com/Klepac-Ceraj-Lab/Resonance/blob/main/src/Resonance.jl#L113-L116).
+
+## Best practices when collaborating {.smaller}
+
+- Always work on (non-default) branches
+- Always do `git pull` before starting a new branch
+- To work on a project that you don't have write-access to, use PR/MR
+  - Make a "fork" (this is just `git clone` into your user account)
+  - `git clone` from your fork to your computer
+  - Make a branch, commit changes, `git push --set-upstream origin $BRANCH_NAME`
+  - open Pull Request (you can do this before you're finished)
+
+# Additional Resources
+
+## Links {.smaller}
+
+
+::: {.nonincremental}
+- This presentation
+  - Repo for these slides: [https://gitlab.com/kescobo/hutlab-git](https://gitlab.com/kescobo/hutlab-git)
+  - Rendered slides: [https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html](https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html)
+- Other useful resources
+  - Red Badger - Git and Github in plain english: [https://content.red-badger.com/resources/what-is-git-and-github](https://content.red-badger.com/resources/what-is-git-and-github)
+  - Software carpentries Git module: [https://swcarpentry.github.io/git-novice/](https://swcarpentry.github.io/git-novice/)
+  - Atlassian git tutorials: [https://www.atlassian.com/git/tutorials](https://www.atlassian.com/git/tutorials)
+- Software
+  - `delta` - better diffs: [https://github.com/dandavison/delta](https://github.com/dandavison/delta)
+  - `starship` - better prompts: [https://starship.rs](https://starship.rs)
+  - `gitkraken` - the best `git` GUI: [https://www.gitkraken.com](https://www.gitkraken.com)
+:::
+
+## I can help! {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+![](https://imgs.xkcd.com/comics/git.png)
+:::
+
+::: {.column width="50%"}
+>If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git.
+>Just wait through a few minutes of 'It's really pretty simple, just think of branches as...'
+>and eventually you'll learn the commands that will fix everything.
+
+::: {.fragment}
+```{.txt filename="git.txt"}
+Kevin Bonham, PhD
+Slack: Kevin Bonham
+Github: https://github.com/kescobo
+Gitlab: https://gitlab.com/kescobo
+Web: https://blog.bonham.ch
+```
+::: 
+:::
+:::

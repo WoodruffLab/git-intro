@@ -1,0 +1,40 @@
+image: almalinux
+
+variables:
+  LINUX_PKGS: "git unzip"
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - yum update -y
+  - yum install -y ${LINUX_PKGS}
+  - git clone https://github.com/quarto-dev/quarto-cli
+  - cd quarto-cli
+  - bash configure.sh
+  - cd ..
+
+compile_quarto:
+    stage: build
+    script:
+        - quarto render tutorial-slides.qmd
+    artifacts:
+        # Store the PDF(s) as build artifacts so they survive to the next build step (and can be browsed by devs)
+        when: always
+        paths:
+            - ./*.html
+            - ./*_files/*
+
+pages:
+    stage: deploy
+    script:
+        - mkdir .public
+        - cp -r ./* .public
+        - rm -rf public
+        - mv .public public
+    artifacts:
+        paths:
+        - public
+    rules:
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
