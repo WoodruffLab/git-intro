@@ -150,7 +150,7 @@ Being motivated to practice is hard without seeing the value!
 
 ## Basic vocabulary {.smaller}
 
-::: {.nonincremental}
+:::
 - **git**: the software to manage version control
 - **repository** (repo): a directory with superpowers
 - **remote**: another place where your git repo lives (often github / gitlab, but it's still just a directory)
@@ -163,7 +163,7 @@ Being motivated to practice is hard without seeing the value!
 
 ## Basic actions {.smaller .scrollable}
 
-::: {.nonincremental}
+:::
 - `git init`: give your directory `git` superpowers (usually just done once on a brand new project)
 	- This automatically sets up a default branch `main` or `master`
 - `git clone $URL`: make a local copy of some remote repo
