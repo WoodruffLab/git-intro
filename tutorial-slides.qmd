@@ -492,8 +492,8 @@ It's worth it!
 
 ::: {.nonincremental}
 - This presentation
-  - Repo for these slides: [https://gitlab.com/kescobo/hutlab-git](https://gitlab.com/kescobo/hutlab-git)
-  - Rendered slides: [https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html](https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html)
+  - Repo for these slides: [https://github.com/woodrufflab/git-intro](https://github.com/woodrufflab/git-intro)
+  - Rendered slides: [https://woodrufflab.github.io/git-intro/tutorial-slides.html](https://woodrufflab.github.io/git-intro/tutorial-slides.html)
 - Other useful resources
   - Red Badger - Git and Github in plain english: [https://content.red-badger.com/resources/what-is-git-and-github](https://content.red-badger.com/resources/what-is-git-and-github)
   - Software carpentries Git module: [https://swcarpentry.github.io/git-novice/](https://swcarpentry.github.io/git-novice/)
