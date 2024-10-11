@@ -526,42 +526,11 @@ Kevin Bonham, PhD
 </section>
 <section id="basic-vocabulary" class="slide level2 smaller">
 <h2>Basic vocabulary</h2>
-<div>
-<ul>
-<li><strong>git</strong>: the software to manage version control</li>
-<li><strong>repository</strong> (repo): a directory with superpowers</li>
-<li><strong>remote</strong>: another place where your git repo lives (often github / gitlab, but it’s still just a directory)</li>
-<li><strong>commit</strong> (noun form): a snapshot of the state of all of your files at a given time - note: each commit only stores a diff from the previous state</li>
-<li><strong>diff</strong>: summary of line-by-line changes from one state to the next</li>
-<li><strong>tracking</strong>: files that have a state recorded by git (eg they have been committed)</li>
-<li><strong>stage</strong>: file(s) that have a change that should be registered in the next commit.</li>
-<li><strong>branch</strong>: a series of commits. The default is usually called <code>master</code> or <code>main</code></li>
-</ul>
-</div>
+<p>::: - <strong>git</strong>: the software to manage version control - <strong>repository</strong> (repo): a directory with superpowers - <strong>remote</strong>: another place where your git repo lives (often github / gitlab, but it’s still just a directory) - <strong>commit</strong> (noun form): a snapshot of the state of all of your files at a given time - note: each commit only stores a diff from the previous state - <strong>diff</strong>: summary of line-by-line changes from one state to the next - <strong>tracking</strong>: files that have a state recorded by git (eg they have been committed) - <strong>stage</strong>: file(s) that have a change that should be registered in the next commit. - <strong>branch</strong>: a series of commits. The default is usually called <code>master</code> or <code>main</code> :::</p>
 </section>
 <section id="basic-actions" class="slide level2 smaller scrollable">
 <h2>Basic actions</h2>
-<div>
-<ul>
-<li><code>git init</code>: give your directory <code>git</code> superpowers (usually just done once on a brand new project)
-<ul>
-<li>This automatically sets up a default branch <code>main</code> or <code>master</code></li>
-</ul></li>
-<li><code>git clone $URL</code>: make a local copy of some remote repo - this automatically sets up <code>$URL</code> as a remote called <code>origin</code></li>
-<li><code>git add $FILE</code>: stage a file to be committed</li>
-<li><code>git commit -m 'Some commit message'</code>: commit staged files
-<ul>
-<li>more commonly, use <code>git commit -am 'Some commit message'</code>, which stages AND commits any files that had previously been tracked.</li>
-</ul></li>
-<li><code>git push</code>: sync commits from local to remote (only for current branch)</li>
-<li><code>git pull</code>: sync commits from remote to local (only for current branch)</li>
-<li><code>git branch $NAME</code>: create a new branch with name <code>$NAME</code></li>
-<li><code>git checkout $NAME</code>: set working state to branch <code>$NAME</code>
-<ul>
-<li>you can create and checkout a branch at the same time with <code>git checkout -b $NAME</code></li>
-</ul></li>
-</ul>
-</div>
+<p>::: - <code>git init</code>: give your directory <code>git</code> superpowers (usually just done once on a brand new project) - This automatically sets up a default branch <code>main</code> or <code>master</code> - <code>git clone $URL</code>: make a local copy of some remote repo - this automatically sets up <code>$URL</code> as a remote called <code>origin</code> - <code>git add $FILE</code>: stage a file to be committed - <code>git commit -m 'Some commit message'</code>: commit staged files - more commonly, use <code>git commit -am 'Some commit message'</code>, which stages AND commits any files that had previously been tracked. - <code>git push</code>: sync commits from local to remote (only for current branch) - <code>git pull</code>: sync commits from remote to local (only for current branch) - <code>git branch $NAME</code>: create a new branch with name <code>$NAME</code> - <code>git checkout $NAME</code>: set working state to branch <code>$NAME</code> - you can create and checkout a branch at the same time with <code>git checkout -b $NAME</code> :::</p>
 </section></section>
 <section>
 <section id="demo" class="title-slide slide level1 center">
