@@ -1,0 +1,184 @@
+[
+  {
+    "objectID": "tutorial-slides.html#version-control",
+    "href": "tutorial-slides.html#version-control",
+    "title": "Intro to git for scientists",
+    "section": "Version control",
+    "text": "Version control"
+  },
+  {
+    "objectID": "tutorial-slides.html#versions-are-metadata-on-files",
+    "href": "tutorial-slides.html#versions-are-metadata-on-files",
+    "title": "Intro to git for scientists",
+    "section": "Versions are metadata on files",
+    "text": "Versions are metadata on files\n\n\n$ ls\nmanuscript.docx\nmanuscript_v2.docx\nmanuscript_v2_KSB_edits.docx\nmanuscript_curtis_edits.docx\n\n\nvs\n\n\n\n$ ls\nmanuscript.tex\n$ git log --oneline\n8266b5f (HEAD -&gt; more-revisions, origin/more-revisions) update curtis refs\na7500fe more more more\n5189e38 (tag: v0.6.1, origin/main, origin/HEAD, main) Merge pull request #203 from Klepac-Ceraj-Lab/editorial\n5b82aae last ? tweaks\nf730420 rebuild diff\ncb36033 short title and rearrange post-text\na8dfdf9 Guilherme comments\n0c9df09 remove abreviation in abstract\n75dd314 hack up abstract\n7a1546b change Figure-&gt; fig."
+  },
+  {
+    "objectID": "tutorial-slides.html#code-in-particular-needs-git",
+    "href": "tutorial-slides.html#code-in-particular-needs-git",
+    "title": "Intro to git for scientists",
+    "section": "Code in particular needs git",
+    "text": "Code in particular needs git\n\nCode function often relies on the state of multiple files simultaneously\nAdding or revising code can cause other code to go from a working state to a broken state\nBecause of 👆, collaboration on code can be tricky"
+  },
+  {
+    "objectID": "tutorial-slides.html#the-git-model",
+    "href": "tutorial-slides.html#the-git-model",
+    "title": "Intro to git for scientists",
+    "section": "The git model",
+    "text": "The git model\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nSeeing the value of git often requires using it “well”, but using it well requires practice. Being motivated to practice is hard without seeing the value!"
+  },
+  {
+    "objectID": "tutorial-slides.html#the-git-model-1",
+    "href": "tutorial-slides.html#the-git-model-1",
+    "title": "Intro to git for scientists",
+    "section": "The git model",
+    "text": "The git model\n\n\n\n\n\nCode versions are built on “diffs”; only changes from previous version are “saved”.\nEach diff is line-based; changing one character is recorded as deleting the line and inserting a new one\nVersions (“commits”) are always explicit"
+  },
+  {
+    "objectID": "tutorial-slides.html#what-is-git-good-for",
+    "href": "tutorial-slides.html#what-is-git-good-for",
+    "title": "Intro to git for scientists",
+    "section": "What is git good for?",
+    "text": "What is git good for?\n\nplain text files\nfiles that are undergoing incremental (and line-based) change\nfiles whose state is changing frequently in small chunks\nfiles whose content depends on other files in the same directory"
+  },
+  {
+    "objectID": "tutorial-slides.html#what-is-git-not-good-for",
+    "href": "tutorial-slides.html#what-is-git-not-good-for",
+    "title": "Intro to git for scientists",
+    "section": "What is git NOT good for?",
+    "text": "What is git NOT good for?\n\nfiles where the entire file is changing frequently (eg model outputs)\nvery large files (eg .fastq)\nbinary files (eg .pdf)\nfiles where changes aren’t line-based (eg many-column .csv)"
+  },
+  {
+    "objectID": "tutorial-slides.html#basic-vocabulary",
+    "href": "tutorial-slides.html#basic-vocabulary",
+    "title": "Intro to git for scientists",
+    "section": "Basic vocabulary",
+    "text": "Basic vocabulary\n\n\ngit: the software to manage version control\nrepository (repo): a directory with superpowers\nremote: another place where your git repo lives (often github / gitlab, but it’s still just a directory)\ncommit (noun form): a snapshot of the state of all of your files at a given time - note: each commit only stores a diff from the previous state\ndiff: summary of line-by-line changes from one state to the next\ntracking: files that have a state recorded by git (eg they have been committed)\nstage: file(s) that have a change that should be registered in the next commit.\nbranch: a series of commits. The default is usually called master or main"
+  },
+  {
+    "objectID": "tutorial-slides.html#basic-actions",
+    "href": "tutorial-slides.html#basic-actions",
+    "title": "Intro to git for scientists",
+    "section": "Basic actions",
+    "text": "Basic actions\n\n\ngit init: give your directory git superpowers (usually just done once on a brand new project)\n\nThis automatically sets up a default branch main or master\n\ngit clone $URL: make a local copy of some remote repo - this automatically sets up $URL as a remote called origin\ngit add $FILE: stage a file to be committed\ngit commit -m 'Some commit message': commit staged files\n\nmore commonly, use git commit -am 'Some commit message', which stages AND commits any files that had previously been tracked.\n\ngit push: sync commits from local to remote (only for current branch)\ngit pull: sync commits from remote to local (only for current branch)\ngit branch $NAME: create a new branch with name $NAME\ngit checkout $NAME: set working state to branch $NAME\n\nyou can create and checkout a branch at the same time with git checkout -b $NAME"
+  },
+  {
+    "objectID": "tutorial-slides.html#section",
+    "href": "tutorial-slides.html#section",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-1",
+    "href": "tutorial-slides.html#section-1",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-2",
+    "href": "tutorial-slides.html#section-2",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-3",
+    "href": "tutorial-slides.html#section-3",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-4",
+    "href": "tutorial-slides.html#section-4",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#fast-foward-merge",
+    "href": "tutorial-slides.html#fast-foward-merge",
+    "title": "Intro to git for scientists",
+    "section": "“Fast-foward” merge",
+    "text": "“Fast-foward” merge\n$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#fast-foward-merge-1",
+    "href": "tutorial-slides.html#fast-foward-merge-1",
+    "title": "Intro to git for scientists",
+    "section": "“Fast-foward” merge",
+    "text": "“Fast-foward” merge\n$ git checkout main\n$ git reset --hard\n$ git checkout -b revisions # create a new branch, and check it out\n# make some edits to files\n$ git commit -am 'made changes'\n# make some edits to file1.txt and file2.txt\n$ git add file1.txt\n$ git commit -m 'Change file1'\n$ git add file2.txt\n$ git commit -m 'Change file2'\n$ git checkout main\n$ git merge revisions\n\nsee it in a terminal: https://asciinema.org/a/pFVUuEbZP6soYoYjvOKE1Eo52"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-5",
+    "href": "tutorial-slides.html#section-5",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "see it in a terminal: https://asciinema.org/a/5msKW2uk49gIf7UBmAuezihqY"
+  },
+  {
+    "objectID": "tutorial-slides.html#best-practices-with-git",
+    "href": "tutorial-slides.html#best-practices-with-git",
+    "title": "Intro to git for scientists",
+    "section": "Best practices with git",
+    "text": "Best practices with git\n\nuse git status frequently\n\nusing a terminal prompt helper (eg starship) provides visual status information\n\ncommit early, commit often\nuse informative commit messages\n\npretend (ha!) that your future self won’t remember what you were doing\n\nreview your git log --oneline --graph (I set this to gl)\nuse branches even when you’re working on your own.\n\nmerge branches to main when there is a complete “product” (eg a figure, model, cleaned dataset)\nespecially at first, use --no-ff to visualize branches (you can set this as the default with git config --global merge.ff false)"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-6",
+    "href": "tutorial-slides.html#section-6",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "Very large commits\n\n\nThis often hapens when you forget about git for a while, then think “oh crap, I should be committing this!”, then do\n$ git add .\n$ git commit -m 'lots of stuff'\nThe problem: diffs for very large commits aren’t helpful, and any attempt to merge accross branches will almost certainly lead to messy conflicts.\n\n\n\n\n\n\n\n\n\n\nThe Solution: Commit more frequently\n\n\nYou should commit approximately every time you feel like you should save the file, at least in the beginning.\nWhen you inevitably forget anyway, try to commit one file at a time, and use git diff to see what has changed so that you can have an informative commit message. If you have a lot of different changes in one file, use git add --patch $FILE do just stage portions of the changes."
+  },
+  {
+    "objectID": "tutorial-slides.html#section-7",
+    "href": "tutorial-slides.html#section-7",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "Merge conflict paralysis\n\n\nEspecially if you’re working on your own, on one branch at a time, you can go a long time without encountering merge conflicts. Then, when one inevitably arises, you have no idea what do do.\nThe problem: using git pull or git merge in a way that generates a a merge conflict puts your code in an un-runnable state, and blocks the ability to continue working.\n\n\n\n\n\n\n\n\n\n\nThe Solution: Don’t panic! (42)\n\n\ngit is made for merge conflicts. You can almost always recover.\n\nUse git merge --abort. This should undo the pull or merge that you attempted.\nDouble check that you’re doing what you expected. Use git status and git log.\nIf you are doing the right thing and there are conflicts, checkout a new branch, and attempt the merge there, so that if you screw it up, you can recover easily.\nUse a GUI to help (eg VS code, gitkraken)"
+  },
+  {
+    "objectID": "tutorial-slides.html#section-8",
+    "href": "tutorial-slides.html#section-8",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "Oops! I committed something I shouldn’t have\n\n\nCommitting very large files or files that contain private information (eg identifiable data, security keys) can often happen by mistake, espcially if you use git add . (don’t do that!).\nThe problem: Even if you later do git rm $FILE, the addition and removal of those files are still in your history!\n\n\n\n\n\n\n\n\n\n\nThe Solution: pay attention to what you commit\n\n\nYou can use a .gitignore file to avoid accidentially committing eg .csv or .pdf files. If there’s one of those files you actually do want to track, you can always do git add --force $FILE. You can have per-repo, per-directory, or even global .gitignore files!\nIf you do commit something sensitive, follow these steps to erase it. Note that this will change every commit downstream of adding the file (and if you later try to merge branches in other places, they may still have the data)."
+  },
+  {
+    "objectID": "tutorial-slides.html#section-9",
+    "href": "tutorial-slides.html#section-9",
+    "title": "Intro to git for scientists",
+    "section": "",
+    "text": "Abandoning git\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Solution: use git!\n\n\nIt’s worth it!"
+  },
+  {
+    "objectID": "tutorial-slides.html#github-and-gitlab-and-gitea-etc-are-social-layers-on-top-of-git",
+    "href": "tutorial-slides.html#github-and-gitlab-and-gitea-etc-are-social-layers-on-top-of-git",
+    "title": "Intro to git for scientists",
+    "section": "github (and gitlab and gitea etc) are social layers on top of git",
+    "text": "github (and gitlab and gitea etc) are social layers on top of git\n\nRepos on github are still just directories with super powers\n“Pull Requests” (“merge requests” on gitlab) can be a useful way to keep track of your branches\n“Issues” are useful for keeping track of things you want to do or known problems\nOn github, you can link to highlights of individual lines of code."
+  },
+  {
+    "objectID": "tutorial-slides.html#best-practices-when-collaborating",
+    "href": "tutorial-slides.html#best-practices-when-collaborating",
+    "title": "Intro to git for scientists",
+    "section": "Best practices when collaborating",
+    "text": "Best practices when collaborating\n\nAlways work on (non-default) branches\nAlways do git pull before starting a new branch\nTo work on a project that you don’t have write-access to, use PR/MR\n\nMake a “fork” (this is just git clone into your user account)\ngit clone from your fork to your computer\nMake a branch, commit changes, git push --set-upstream origin $BRANCH_NAME\nopen Pull Request (you can do this before you’re finished)"
+  },
+  {
+    "objectID": "tutorial-slides.html#links",
+    "href": "tutorial-slides.html#links",
+    "title": "Intro to git for scientists",
+    "section": "Links",
+    "text": "Links\n\n\nThis presentation\n\nRepo for these slides: https://gitlab.com/kescobo/hutlab-git\nRendered slides: https://kescobo.gitlab.io/hutlab-git/tutorial-slides.html\n\nOther useful resources\n\nRed Badger - Git and Github in plain english: https://content.red-badger.com/resources/what-is-git-and-github\nSoftware carpentries Git module: https://swcarpentry.github.io/git-novice/\nAtlassian git tutorials: https://www.atlassian.com/git/tutorials\n\nSoftware\n\ndelta - better diffs: https://github.com/dandavison/delta\nstarship - better prompts: https://starship.rs\ngitkraken - the best git GUI: https://www.gitkraken.com"
+  },
+  {
+    "objectID": "tutorial-slides.html#i-can-help",
+    "href": "tutorial-slides.html#i-can-help",
+    "title": "Intro to git for scientists",
+    "section": "I can help!",
+    "text": "I can help!\n\n\n\n\n\nIf that doesn’t fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of ‘It’s really pretty simple, just think of branches as…’ and eventually you’ll learn the commands that will fix everything.\n\n\n\n\ngit.txt\n\nKevin Bonham, PhD\nSlack: Kevin Bonham\nGithub: https://github.com/kescobo\nGitlab: https://gitlab.com/kescobo\nWeb: https://blog.bonham.ch"
+  }
+]
